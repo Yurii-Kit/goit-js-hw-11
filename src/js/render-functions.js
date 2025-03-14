@@ -25,10 +25,10 @@ export function renderGallery(images) {
             <img src="${webformatURL}" alt="${tags}" loading="lazy"/>
           </a>
           <div class="info">
-            <p>Likes: ${likes}</p>
-            <p>Views: ${views}</p>
-            <p>Comments: ${comments}</p>
-            <p>Downloads: ${downloads}</p>
+            <p><b>Likes:</b>${likes}</p>
+            <p><b>Views:</b>${views}</p>
+            <p><b>Comments:</b>${comments}</p>
+            <p><b>Downloads:</b>${downloads}</p>
           </div>
         </li>`
     )

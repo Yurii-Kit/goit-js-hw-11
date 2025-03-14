@@ -16,7 +16,10 @@ const input = form.querySelector('input');
 iziToast.info({
   title: 'Hello',
   message: 'Please enter a search query',
+  position: 'center',
 });
+
+hideLoader();
 
 form.addEventListener('submit', event => {
   event.preventDefault();
@@ -29,9 +32,9 @@ form.addEventListener('submit', event => {
       title: 'Warning',
       message: 'Please enter a search query correctly',
     });
-    event.currentTarget.reset();
+    form.reset();
+
     clearGallery();
-    showLoader();
     return;
   }
 
@@ -49,8 +52,9 @@ form.addEventListener('submit', event => {
           title: 'Error',
           message:
             'Sorry, there are no images matching your search query. Please try again!',
+          position: 'topLeft',
         });
-        clearGallery();
+
         form.reset();
       } else {
         renderGallery(data.hits);
@@ -61,11 +65,10 @@ form.addEventListener('submit', event => {
       iziToast.error({
         title: 'Error',
         message: `${error.message}`,
+        position: 'topRight',
       });
     })
     .finally(() => {
-      if (renderGallery(data.hits)) {
-        hideLoader();
-      }
+      hideLoader();
     });
 });
