@@ -74,10 +74,11 @@ button[type='submit']:hover {
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+
+  position: absolute;
+  left: 50%;
 }
-.hidden {
-  display: none;
-}
+
 @keyframes rotation {
   0% {
     transform: rotate(0deg);
