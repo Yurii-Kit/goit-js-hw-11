@@ -55,7 +55,3 @@ export function showLoader() {
 export function hideLoader() {
   document.querySelector('.loader').style.display = 'none';
 }
-
-export function showToast(message) {
-  iziToast.error({ message });
-}
