@@ -12,40 +12,46 @@ import {
 const form = document.querySelector('.form');
 const input = form.querySelector('input');
 
+// Показуємо привітання
 iziToast.info({
   title: 'Hello',
   message: 'Please enter a search query',
   position: 'center',
 });
 
+// Ховаємо лоадер (за замовчуванням)
 hideLoader();
 
+// Обробник події для форми
 form.addEventListener('submit', event => {
-  event.preventDefault();
-  const query = input.value.trim();
-  console.log(query);
+  event.preventDefault(); // Зупиняємо стандартне перезавантаження сторінки
 
+  const query = input.value.trim(); // Отримуємо текст, введений користувачем
+  console.log(query); // Виводимо запит у консоль
+
+  // Якщо запит порожній
   if (!query) {
     console.log('Empty query detected');
     iziToast.warning({
       title: 'Warning',
       message: 'Please enter a search query correctly',
     });
-    form.reset();
 
-    clearGallery();
-    return;
+    form.reset(); // Очищуємо форму
+    clearGallery(); // Очищуємо галерею
+    return; // Виходимо з функції
   }
 
-  clearGallery();
-  showLoader();
-  console.log('Loader shown');
+  clearGallery(); // Очищуємо галерею перед новим пошуком
+  showLoader(); // Показуємо лоадер
 
+  // Запит до API
   fetchImages(query)
     .then(response => {
       const data = response.data;
-      console.log(data);
+      // console.log(data);
 
+      // Якщо не знайдено результатів
       if (data.hits.length === 0) {
         iziToast.error({
           title: 'Error',
@@ -54,11 +60,13 @@ form.addEventListener('submit', event => {
           position: 'topLeft',
         });
 
-        form.reset();
+        form.reset(); // Очищуємо форму
       } else {
-        renderGallery(data.hits);
+        renderGallery(data.hits); // Відображаємо галерею
+        form.reset(); // Очищуємо поле вводу після успішного пошуку
       }
     })
+    // Якщо сталася помилка
     .catch(error => {
       console.log(error);
       iziToast.error({
@@ -68,6 +76,6 @@ form.addEventListener('submit', event => {
       });
     })
     .finally(() => {
-      hideLoader();
+      hideLoader(); // Ховаємо лоадер
     });
 });

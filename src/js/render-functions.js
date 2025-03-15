@@ -6,6 +6,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 const gallery = document.querySelector('.gallery');
 let lightbox = null;
 
+// Функція для рендерингу галереї
 export function renderGallery(images) {
   clearGallery();
 
@@ -44,10 +45,12 @@ export function renderGallery(images) {
   }
 }
 
+// Очищення галереї
 export function clearGallery() {
   gallery.innerHTML = '';
 }
 
+// Показ/приховування лоадера
 export function showLoader() {
   document.querySelector('.loader').style.display = 'block';
 }
